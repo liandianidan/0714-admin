@@ -12,6 +12,7 @@ import  memoryUtils  from '../../utils/memoryUtils'
  
  class Login extends Component{
   handleSubmit = e => {
+    //阻止表单的默认行为
     e.preventDefault();
     //取出输入相关的数据
     // const form = this.props.form;
@@ -19,17 +20,18 @@ import  memoryUtils  from '../../utils/memoryUtils'
     // const username = form.getFieldValue('username')
     // const password = form.getFieldValue('password')
     // console.log(values,username,password)
-  //对表单所有的字段进行统一验证
+  //对表单所有的字段进行统一验证并获取输入域的值
   this.props.form.validateFields(async (err,{username,password})=>{
      if(!err){
         //  alert(`登录发送ajax请求，username=${username},password=${password}`)
-      //调用函数传参，并返回一个promise对象
+      //发送登录请求，并返回一个promise对象
       const  result= await reqLogin(username,password)
-      console.log(result)
+      
         if(result.status===0){
-          //获取数据,将user信息保存到local中
+          //获取数据
           const user=result.data
          // localStorage.setItem('user_key',JSON.stringify(user))
+         //将user信息保存到local中
           storageUtils.saveUser(user)
          //保存到内存中
          memoryUtils.user=user
@@ -50,6 +52,7 @@ import  memoryUtils  from '../../utils/memoryUtils'
 
   //自定义校验方式
   validatePwd = (rule, value, callback) => {
+    //去空格
       value=value.trim();
       if(!value){
           callback('密码不能为空')

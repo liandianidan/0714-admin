@@ -2,5 +2,6 @@ import storageUtils from "./storageUtils";
 
 
 export default{
-    user:storageUtils.getUser()//用来储存用户信息的，初始值为locol中读取的user
+    user:storageUtils.getUser(),//用来储存用户信息的，初始值为locol中读取的user
+    product:{}  //需要查看的商品对象
 }

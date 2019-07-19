@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import {Link,withRouter} from 'react-router-dom'
-import { Menu, Icon, Button } from 'antd'
+import { Menu, Icon } from 'antd'
 
 
 
@@ -85,6 +85,8 @@ const { SubMenu } = Menu;
           },[])
        
      }
+
+
      //在render第一次执行之前
 componentWillMount(){
      this.menuNodes = this.getMenuNodes2(menuList)
@@ -119,11 +121,7 @@ componentWillMount(){
 }
 export default withRouter(LeftNav)
 
-
-
-
-
-  {/* 第一种简写方式 */}
+    {/* 第一种简写方式 */}
             {/* <Menu.Item key="/home">
               <Link to='/home'>
                 <Icon type="home" />

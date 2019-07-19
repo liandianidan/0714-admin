@@ -49,7 +49,7 @@ export default class Admin extends Component{
               <Route path='/charts/bar' component={Bar}/>
               <Route path='/charts/line' component={Line}/>
               <Route path='/charts/pie' component={Pie}/>
-              <Redirect to='/category'/>
+              <Redirect to='/product'/>
               
               
             </Switch>

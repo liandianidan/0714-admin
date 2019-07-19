@@ -8,7 +8,7 @@ import storageUtils from '../../utils/storageUtils'
 import {formateDate} from '../../utils/dateUtils'
 import { reqWeather } from '../../api';
 import menuList from '../../config/meunConfig'
-const { confirm } = Modal;
+import LinkBotton from '../../components/link-button'
  class Header extends Component {
      state={
          time:formateDate(Date.now()),
@@ -22,11 +22,11 @@ const { confirm } = Modal;
           content: '是否确认退出',
               onOk:()=> {
                 console.log('OK');
-               //删除文件中的数据
+               //删除文件中的用户名、密码
                 storageUtils.removeUser()
-                //删除内存中的数据
+                //删除内存中的用户名、密码
                 memoryUtils.user={}
-                //跳转页面
+                //跳转到登录页面
                 this.props.history.replace('/login')
               },
               onCancel() {
@@ -39,7 +39,9 @@ const { confirm } = Modal;
     //获取跳转的标题
     getTitle=()=>{
       let title=''
+      //获取相对的路径
       const path=this.props.location.pathname
+      //遍历数据并把当前遍历路由赋值给每一项的唯一值
       menuList.forEach((item)=>{
         if(item.key===path){
              title=item.title
@@ -85,10 +87,11 @@ const { confirm } = Modal;
        const {time,dayPictureUrl,weather}=this.state
        let title = this.getTitle()
         return (
+          //样式
             <div className='header'>
                 <div className='header-top'>
                     <span>欢迎，{username}</span>
-                    <a href="javascript:;" onClick={this.logout}>退出</a>
+                    <LinkBotton onClick={this.logout}>退出</LinkBotton>
                 </div>
                 <div className='header-bottom'>
                     <div className='header-bottom-left'>
@@ -107,3 +110,20 @@ const { confirm } = Modal;
     }
 }
 export default withRouter(Header)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
