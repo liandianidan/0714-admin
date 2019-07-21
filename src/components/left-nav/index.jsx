@@ -92,8 +92,11 @@ componentWillMount(){
      this.menuNodes = this.getMenuNodes2(menuList)
 }
        render(){
-        const selectKey = this.props.location.pathname
-       
+         //获取key
+        let selectKey = this.props.location.pathname
+            if (selectKey.indexOf('/product')===0) {
+                selectKey = '/product'
+            }
            return(
             <div className='left-nav'>
                 <Link className='left-nav-header' to="/home">

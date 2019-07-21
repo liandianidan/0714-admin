@@ -16,21 +16,27 @@ export default class ProductDetail extends Component {
         categoryName:'',
     }
     getCategory= async (categoryId)=>{
+        //发送请求
       const result= await reqCategory(categoryId)
       if(result.status===0){
-        const categoryName = result.data.name
-        console.log(categoryName)
+         const {categoryName} = result.data.name
          this.setState({categoryName}) 
       }
     }
     componentWillMount(){
+        //从内存中获取product
         const product=memoryUtils.product
-        this.getCategory(product.categoryId)
+        if(product._id){
+            //发送请求函数
+            this.getCategory(product.categoryId)
+        }
+        
     }
     render() {
         const {categoryName}=this.state
         //从内存中获取product
         const product=memoryUtils.product
+        //判断product里有没有值或者里面有没有_id的属性，不过没有就进if判断
         if(!product || !product._id){
            return <Redirect to='/product'/>
         }
@@ -43,6 +49,7 @@ export default class ProductDetail extends Component {
             </span>
         )
         return (
+            //布局
             <Card  title={title} className="detail">
                 <List>
                     <Item>

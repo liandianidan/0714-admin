@@ -24,7 +24,7 @@ export  const reqWeather=(city)=>{
 })
 }
 //发送GET请求获取品类分类数据
-export const reqCategorys=()=>ajax.get(BASE+'manage/category/list')
+export const reqCategorys=()=>ajax(BASE+'/manage/category/list')
 //发送添加分类请求
 export const reqAddCategory=(categoryName)=>ajax.post(BASE+'/manage/category/add',{categoryName})
 //发送修改分类请求

@@ -63,20 +63,16 @@ export default class Home extends Component {
               render:(product)=>(
                   <span>
                       <LinkButton onClick={()=>{
-                        //在内存中保存product
-                        memoryUtils.product=product 
-                       this.props.history.push('/product/detail')
-                         }}>详情</LinkButton>
-                       <LinkButton
-              onClick={() => {
-                // 在内存中保存product
-                memoryUtils.product = product
-                this.props.history.push('/product/addupdate')
-              }}
-            >修改
-            
-            </LinkButton>
-                  </span>
+                                        //在内存中保存product
+                                        memoryUtils.product=product 
+                                        this.props.history.push('/product/detail')
+                                        }}>详情</LinkButton>
+                       <LinkButton onClick={() => {
+                                        // 在内存中保存product
+                                        memoryUtils.product = product
+                                        this.props.history.push('/product/addupdate')
+                                        }}>修改</LinkButton>
+                </span>
               )
             
               },
@@ -98,18 +94,17 @@ export default class Home extends Component {
     }
     //发请求的函数
     getProducts= async (pageNum)=>{
-    this.pageNum=pageNum
-    //获取状态
-    const {searchName,searchType}=this.state   
-    //判断searchName有没有值，有值就是发送搜索请求
-    let result
-    if(searchName){
-    //发送搜索请求
-    result = await reqSearchProducts({pageNum,pageSize:PAGE_NUM,searchName,searchType})
-    console.log(result)
-    }else{
-    //发送数据请求
-    result=await reqPrsducts(pageNum,PAGE_NUM)
+            this.pageNum=pageNum
+            //获取状态
+            const {searchName,searchType}=this.state   
+            //判断searchName有没有值，有值就是发送搜索请求
+            let result
+        if(searchName){
+            //发送搜索请求
+            result = await reqSearchProducts({pageNum,pageSize:PAGE_NUM,searchName,searchType})
+        }else{
+            //发送数据请求
+            result=await reqPrsducts(pageNum,PAGE_NUM)
     }
     
     //更新状态修改loading状态
@@ -118,13 +113,13 @@ export default class Home extends Component {
     })
      //判断是否拿到数据
      if(result.status===0){
-         //获取到需要的数据
-        const {total,list}=result.data
-        //更新状态
-        this.setState({
-            products:list,
-            total,
-        })
+            //获取到需要的数据
+            const {total,list}=result.data
+            //更新状态
+            this.setState({
+                products:list,
+                total,
+            })
      }
      
      
@@ -165,7 +160,10 @@ export default class Home extends Component {
         
     
      const extra=(
-      <Button type='primary' >
+      <Button type='primary'  onClick={()=>{
+          memoryUtils.product = {}
+          this.props.history.push('/product/addupdate')
+          }}>
           <Icon type='plus'/>
           <span>添加</span>
       </Button>
